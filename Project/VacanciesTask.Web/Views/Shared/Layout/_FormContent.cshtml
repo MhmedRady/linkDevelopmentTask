@@ -1,0 +1,62 @@
+@{
+    Layout = "~/Views/Shared/Layout/_CardView.cshtml";
+}
+
+<form id="formContent" class="form row" 
+      asp-action="@ViewBag.action" 
+      asp-route-id="@(Model.Id != Guid.Empty? Model.Id: null)" 
+      method="post" enctype="multipart/form-data">
+    @RenderBody()
+    <div class="form-group col-12 mb-2">
+        <fieldset>
+            <div class="float-left">
+                <button id="formContentSubmit" type="submit" class="btn btn-primary"> <i class="la la-save"></i> @localizer["submit"]</button>
+            </div>
+        </fieldset>
+    </div>
+</form>
+
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/vendors/css/forms/selects/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/css-ltr/plugins/forms/switch.min.css">
+    @RenderSection("Styles", required: false)
+}
+
+@section Scripts {
+    <script src="~/Admin/app-assets/vendors/js/forms/select/select2.full.min.js"
+            type="text/javascript"></script>
+    <script src="~/Admin/app-assets/js/scripts/forms/select/form-select2.js"
+            type="text/javascript"></script>
+    <script src="~/Admin/app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js"
+            type="text/javascript"></script>
+    <script src="~/Admin/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js"
+            type="text/javascript"></script>
+    <script src="~/Admin/app-assets/vendors/js/forms/toggle/switchery.min.js"
+            type="text/javascript"></script>
+    <script src="~/Admin/app-assets/js/scripts/forms/switch.js"
+            type="text/javascript"></script>
+
+    <script>
+       function changeImage()
+        {
+            let img = document.getElementById("img");
+            let imgFile = document.getElementById("imgFile");
+            if (img) img.onclick = _=>{imgFile.click();};
+            if (imgFile) imgFile.onchange = (e)=>{
+                let reader = new FileReader();
+                let file = e.target.files[0];
+                reader.onload = _=>{img.src = reader.result;};
+                reader.readAsDataURL(file);
+            }    
+        }       
+        changeImage();
+       let select2 = document.querySelectorAll(".select2-container");
+       if (select2.length){
+           select2.forEach((el)=>{
+              el.style.width = "100%"; 
+           });
+       }
+           
+    </script>
+    @RenderSection("Scripts", required: false)
+}

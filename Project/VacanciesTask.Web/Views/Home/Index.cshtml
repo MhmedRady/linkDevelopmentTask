@@ -1,0 +1,44 @@
+﻿@model NewProject.Application.UserDto
+@{
+
+    ViewBag.title = "Home Page";
+    Layout = "Layout/_HorizontalLayout";
+}
+
+<!--------------------------------------------------------------------------------------------------------->
+<div class="row">
+  <div id="recent-transactions" class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title text-bold-700"> TitleJobs </h4>
+        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+        <div class="heading-elements">
+          <ul class="list-inline mb-0">
+            <a class="btn btn-primary" asp-action="Index" asp-area="Admin">Add New Job</a>
+          </ul>
+        </div>
+      </div>
+      <div class="card-content">
+        TitleJobs
+      </div>
+    </div>
+  </div>
+  </div>
+<!--------------------------------------------------------------------------------------------------------->
+
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/css-ltr/pages/timeline.css">
+}
+
+@section Scripts {
+    <script src="~/Admin/app-assets/vendors/js/charts/chart.min.js"
+        type="text/javascript"></script>
+    <script src="~/Admin/app-assets/vendors/js/charts/chartist.min.js" type="text/javascript"></script>
+    <script src="~/Admin/app-assets/vendors/js/charts/chartist-plugin-tooltip.min.js"
+        type="text/javascript"></script>
+    <script src="~/Admin/app-assets/vendors/js/charts/raphael-min.js" type="text/javascript"></script>
+    <script src="~/Admin/app-assets/vendors/js/charts/morris.min.js" type="text/javascript"></script>
+    <script src="~/Admin/app-assets/vendors/js/timeline/horizontal-timeline.js" type="text/javascript"></script>
+    <script src="~/Admin/app-assets/js/scripts/pages/dashboard-ecommerce.js"
+        type="text/javascript"></script>
+}

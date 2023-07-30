@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html class="loading" lang="en" dir="ltr">
+<head>
+    <partial name="../Panel/_Head.cshtml" />
+    @RenderSection("Head", required: false)
+    @*START PANEL STAYLE LINKS*@
+    <partial name="../Panel/_Style.cshtml" />
+    <!-- BEGIN Custom CSS-->
+    @RenderSection("Styles", required: false)
+    <!-- END Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="~/admin/assets/css/StyleSheet.css" />
+</head>
+<body class="vertical-layout vertical-menu-modern 1-column bg-lighten-2 menu-expanded blank-page blank-page"
+      data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+    
+    <div class="app-content content overflow-y-auto">
+        <div class="content-wrapper">
+            <div class="content-header row">
+       
+            </div>
+            <div class="content-body">
+                <section class="flexbox-container">
+                    <div class="col-md-4 col-12 d-flex align-items-center justify-content-center mx-auto">
+                        
+                        <div class="card border-grey border-lighten-3 m-0 box-shadow-2 w-100">
+                            <div class="card-header border-0">
+                                <div class="card-title text-center login-img">
+                                    <img src="~/images/logo-dark-lg.png" alt="branding logo">
+                                </div>
+                                <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
+                                    <span style="font-size: 1.2rem">@ViewData["Title"]</span>
+                                </h6>
+                                
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <partial name="Panel/_TempMessages"/>
+                                    @*START PAGE CONTENT*@
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+               
+            </div>
+        </div>
+    </div>
+
+    <partial name="../Panel/_Script.cshtml" />
+    
+    <!-- BEGIN PAGE LEVEL JS-->
+    @RenderSection("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
+    <!-- END PAGE LEVEL JS-->
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html class="loading" lang="en" dir="rtl">
+<head>
+    @Html.Partial("Panel/_Head")
+    
+    @RenderSection("Head", required: false)
+
+    @*START PANEL STAYLE LINKS*@
+    @Html.Partial("Panel/_Style")
+
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/admin/app-assets/css-ltr/vendors.css" />
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN MODERN CSS-->
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/admin/app-assets/css-ltr/app.css" />
+          <link rel="stylesheet"
+          type="text/css"
+          href="~/admin/app-assets/fonts/simple-line-icons/style.css" />
+    <!-- END MODERN CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/admin/app-assets/css-ltr/core/menu/menu-types/horizontal-menu.css" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/admin/app-assets/css-ltr/core/colors/palette-gradient.css" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/admin/app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/admin/app-assets/vendors/css/charts/morris.css" />
+    <!-- END Page Level CSS-->
+
+    <!-- BEGIN Custom CSS-->
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" type="text/css" href="~/admin/assets/css/StyleSheet.css" />
+    <!-- END Custom CSS-->
+    
+</head>
+
+  <body class="horizontal-layout horizontal-menu 2-columns menu-expanded pace-done"
+        data-open="click" data-menu="vertical-menu" data-col="2-columns">
+    <header>
+   
+    </header>
+      <div class="app-content content">
+          <div class="content-wrapper">
+              <div class="content-header row">
+              </div>
+              <div class="content-body">
+                  @*START PAGE CONTENT*@
+                  @RenderBody()
+              </div>
+          </div>
+      </div>
+      @Html.Partial("Panel/_Script")
+      
+  <!-- BEGIN PAGE LEVEL JS-->
+      @RenderSection("Scripts", required: false)
+  <!-- END PAGE LEVEL JS-->
+      @await Component.InvokeAsync("NToastNotify")
+      <script src="~/admin/assets/js/scripts.js"></script>
+  </body>
+</html>
+

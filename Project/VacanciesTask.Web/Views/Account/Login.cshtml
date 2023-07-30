@@ -1,0 +1,32 @@
+﻿@model NewProject.Application.LoginDto;
+
+@{
+    ViewData["Title"] = "User Login";
+    Layout = "Layout/_Layout_Login";
+}
+
+<form class="form-horizontal" asp-action="Login" asp-controller="Account" method="post">
+
+  <fieldset class="form-group position-relative has-icon-left">
+    <input type="email" asp-for="Email" class="form-control form-control-xl input-xl" placeholder="admin@asp.net" required="">
+    <div class="form-control-position">
+      <i class="icon-envelope danger font-medium-4"></i>
+    </div>
+  </fieldset>
+  
+  <fieldset class="form-group position-relative has-icon-left">
+    <input type="password" class="form-control form-control-xl input-xl" asp-for="Password" id="password" placeholder="123456789" required="">
+    <div class="form-control-position">
+      <i class="icon-key primary font-medium-4"></i>
+    </div>
+  </fieldset>
+  <button type="submit" class="btn btn-info btn-lg btn-block"><i class="ft-log-in"></i> Login</button>
+  <div class="row">
+    <div class="card-body pb-0">
+      <p class="text-center">Are You New Admin? <a asp-action="Register" asp-controller="Account" class="card-link">Create New</a></p>
+    </div>
+  </div>
+</form>
+
+
+

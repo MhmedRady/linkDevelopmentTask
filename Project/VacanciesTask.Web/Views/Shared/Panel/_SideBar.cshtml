@@ -1,0 +1,59 @@
+﻿<!-- ////////////////////////////////////////////////////////////////////////////-->
+  <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow " data-scroll-to-active="true">
+    <div class="main-menu-content">
+      <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+        <li class=" nav-item">
+            <a asp-action="index" asp-controller="Home"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a>
+        </li>
+        @*DEPARTMENT*@
+        <li class=" navigation-header">
+          <span data-i18n="nav.category.layouts">Vacancies</span>
+          <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right"
+             data-original-title="Catalog"></i>
+        </li>
+        <li class=" nav-item"><a href="#"><i class="la la-puzzle-piece"></i><span class="menu-title" data-i18n="nav.navbars.main">JobTitles</span></a>
+          <ul class="menu-content">
+            <li>
+              <a class="menu-item" asp-action="Index" asp-controller="JobTitle" asp-area="Admin" data-i18n="nav.navbars.nav_light">All JobTitles</a>
+            </li>
+            <li>
+              <a class="menu-item" asp-action="Create" asp-controller="JobTitle" asp-area="Admin" data-i18n="nav.navbars.nav_dark">Add New</a>
+            </li>
+          </ul>
+        </li>
+        @*<li class=" nav-item"><a href="#"><i class="la la-puzzle-piece"></i><span class="menu-title" data-i18n="nav.navbars.main">Centers</span></a>
+        <ul class="menu-content">
+          <li>
+            <a class="menu-item" asp-action="Index" asp-controller="Center" data-i18n="nav.navbars.nav_light">All Centers</a>
+          </li>
+          <li>
+            <a class="menu-item" asp-action="Create" asp-controller="Center" data-i18n="nav.navbars.nav_dark">Add New</a>
+          </li>
+        </ul>
+      </li>
+      <li class=" nav-item"><a href="#"><i class="la la-android"></i><span class="menu-title" data-i18n="nav.navbars.main">Speciality</span></a>
+        <ul class="menu-content">
+          <li>
+            <a class="menu-item" asp-action="Index" asp-controller="Speciality" data-i18n="nav.navbars.nav_light">All Specialities</a>
+          </li>
+          <li>
+            <a class="menu-item" asp-action="Create" asp-controller="Speciality" data-i18n="nav.navbars.nav_dark">Add New</a>
+          </li>
+        </ul>
+      </li>*@
+        
+        @*<li class=" navigation-header">
+          <span data-i18n="nav.category.support">Support</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
+          data-placement="right" data-original-title="Support"></i>
+        </li>
+        <li class=" nav-item"><a href="http://support.pixinvent.com/"><i class="la la-support"></i><span class="menu-title" data-i18n="nav.support_raise_support.main">Raise Support</span></a>
+        </li>
+        <li class=" nav-item">
+          <a href="https://pixinvent.com/modern-admin-clean-bootstrap-4-dashboard-html-template/documentation"><i class="la la-text-height"></i>
+            <span class="menu-title" data-i18n="nav.support_documentation.main">Documentation</span>
+          </a>
+        </li>*@
+      </ul>
+    </div>
+  </div>
+  <!-- ////////////////////////////////////////////////////////////////////////////-->

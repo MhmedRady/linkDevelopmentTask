@@ -1,0 +1,74 @@
+﻿@model NewProject.Application.CreateUserInput;
+@{
+    ViewData["Title"] = "اضافة طالب جديد";
+    Layout = "Layout/_Layout_Login";
+}
+
+<form class="form-horizontal user-form form-register" asp-action="Register" method="post" novalidate="">
+  
+  <fieldset class="form-group position-relative has-icon-left">
+    <input type="text" class="form-control form-control-xl input-xl" placeholder="اسم الطالب بالكامل" asp-for="FullName">
+    <div class="form-control-position">
+      <i class="icon-user primary font-medium-4"></i>
+    </div>
+  </fieldset>
+  
+    <fieldset class="form-group position-relative has-icon-left">
+      <input type="email" asp-for="Email" class="form-control form-control-xl input-xl" placeholder="ادخل البريد الالكتروني المسجل به">
+      <div class="form-control-position">
+        <i class="icon-envelope danger font-medium-4"></i>
+      </div>
+    </fieldset>
+  
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-6">
+      <fieldset class="form-group position-relative has-icon-left">
+        <input type="password" asp-for="PasswordHash" class="form-control form-control-xl input-xl" placeholder="ادخل كلمة المرور">
+        <div class="form-control-position">
+          <i class="icon-key primary font-medium-4"></i>
+        </div>
+      </fieldset>
+    </div>
+    
+    <div class="col-12 col-sm-6 col-md-6">
+      <fieldset class="form-group position-relative has-icon-left">
+        <input type="password" asp-for="ConfirmPassword" class="form-control form-control-xl input-xl" placeholder="تاكيد كلمة المرور">
+        <div class="form-control-position">
+          <i class="icon-lock primary font-medium-4"></i>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12">
+      <fieldset class="form-group position-relative has-icon-left">
+        <input type="text" asp-for="PhoneNumber" class="form-control form-control-xl input-xl" placeholder="رقم الهاتف">
+        <div class="form-control-position">
+          <i class="icon-screen-smartphone primary font-medium-4"></i>
+        </div>
+      </fieldset>
+      
+      <fieldset>
+        <div class="input-group select-course mb-2">
+          <div class="input-group-append">
+            <span class="input-group-text border-right-0" id="basic-addon4"><i class="icon-badge warning font-medium-4"></i></span>
+          </div>
+          <select id="selectParentDepartment" class="form-control form-control-xl input-xl rounded-top-right-0 rounded-bottom-right-0" asp-for="CourseId" asp-items="ViewBag.courses">
+            <option selected="selected" value="null">اختيار الدورة</option>
+          </select>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-6 mb-2">
+      <button type="submit" class="btn btn-info btn-lg btn-block"><i class="ft-user-plus"></i> اضافة حساب</button>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 mb-2">
+      <a asp-action="Login" asp-controller="Account" class="btn btn-success btn-lg btn-block"><i class="ft-log-in"></i> تسجيل الدخول</a>
+    </div>
+  </div>
+</form>
+
+
+

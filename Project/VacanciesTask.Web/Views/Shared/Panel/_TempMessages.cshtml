@@ -1,0 +1,10 @@
+﻿<div class="container mx-auto">
+    @if (TempData["error_msg"] != null)
+    {
+        <div class="alert alert-danger text-center">@TempData["error_msg"]</div>
+    }
+    @if (TempData["success_msg"] != null)
+    {
+        <div class="alert alert-success text-center">@TempData["success_msg"]</div>
+    }
+</div>
