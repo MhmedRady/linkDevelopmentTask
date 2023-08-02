@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using NewProject.Repositories;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore.Query;
 using NewProject.Domain;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using NewProject.Domain.BaseEntities;
 using NewProject.Shared;
 
 namespace NewProject.Application;
@@ -17,7 +17,7 @@ namespace NewProject.Application;
 public class CrudGenericManager<TKey, Entity, ReadDto, WriteDto> : ICrudGenericManager<TKey, Entity, ReadDto, WriteDto> 
     where ReadDto : class 
     where WriteDto : class
-    where Entity : class
+    where Entity : Entity<TKey>
 {
     private readonly IGeneralRepository<Entity, TKey> _repository;
     private readonly IMapper _mapper;
@@ -49,17 +49,16 @@ public class CrudGenericManager<TKey, Entity, ReadDto, WriteDto> : ICrudGenericM
         return _repository.Count(expression);
     }
 
-    public async Task<IEnumerable<ReadDto>> GetAll(Expression<Func<Entity, bool>> expression,  int? take, int? skip,
-        Expression<Func<Entity, object>> orderBy, string orderDirection = Constanties.ORDERASC, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>> include = null)
+    public async Task<IEnumerable<ReadDto>> GetAll(Expression<Func<Entity, bool>> expression,  int? take, int? skip, Expression<Func<Entity, object>> orderBy, string orderDirection = Constanties.ORDERASC, params string[] includes)
     {
         var data = _repository.Get(expression: expression, take: take, skip: skip, orderby: orderBy,
-            orderDirection: orderDirection, include: include);
+            orderbyDirection: orderDirection, include: includes);
         return _mapper.Map<IEnumerable<ReadDto>>(data);
     }
 
-    public async Task<IEnumerable<ReadDto>> GetAll(Expression<Func<Entity, bool>> expression, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>> include = null)
+    public async Task<IEnumerable<ReadDto>>  GetAll(Expression<Func<Entity, bool>> expression, params string[] includes)
     {
-        var data = _repository.Get(expression: expression, include: include);
+        var data = _repository.Get(expression: expression, include: includes);
         return _mapper.Map<IEnumerable<ReadDto>>(data);
     }
 
@@ -69,9 +68,9 @@ public class CrudGenericManager<TKey, Entity, ReadDto, WriteDto> : ICrudGenericM
         return _mapper.Map<ReadDto>(obj);
     }
     
-    public ReadDto GetBy(Expression<Func<Entity, bool>> expression, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>> include = null)
+    public ReadDto GetBy(Expression<Func<Entity, bool>> expression, params string[] includes)
     {
-        var obj = _repository.GetBy(expression, include: include);
+        var obj = _repository.GetBy(expression, include: includes);
         return _mapper.Map<ReadDto>(obj);
     }
 
@@ -81,9 +80,9 @@ public class CrudGenericManager<TKey, Entity, ReadDto, WriteDto> : ICrudGenericM
         return _mapper.Map<ReadDto>(obj);
     }
 
-    public async Task<WriteDto> GetWrite(Expression<Func<Entity, bool>> expression, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>> include = null)
+    public async Task<WriteDto> GetWrite(Expression<Func<Entity, bool>> expression, params string[]? includes)
     {
-        var obj = _repository.GetBy(expression, include);
+        var obj = _repository.GetBy(expression, includes);
         return _mapper.Map<WriteDto>(obj);
     }
 
@@ -121,8 +120,8 @@ public class CrudGenericManager<TKey, Entity, ReadDto, WriteDto> : ICrudGenericM
 
     public async Task<ReadDto> UpdateById(TKey Id, WriteDto dto)
     {
-        var obj = await GetModelById(Id);
-        // var obj = _mapper.Map<Department>(dto);
+        var obj = _mapper.Map<Entity>(dto);
+        obj.Id = Id;
         var result = _repository.Update(obj);
         await _repository.SaveChangesAsync();
         return _mapper.Map<ReadDto>(result.Entity);

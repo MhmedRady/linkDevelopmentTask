@@ -1,3 +1,5 @@
+using NewProject.Domain.BaseEntities;
+
 namespace NewProject.Application;
 
 public class CreateJobTitleInputDto
@@ -7,8 +9,13 @@ public class CreateJobTitleInputDto
     public string Responsibilities { get; set; }
     public string JobCategory { get; set; }
     public int MaximumApplications { get; set; }
-    
-    public IComparable<SkillsDto> Skills { get; set; }
+    public string _Skills
+    {
+        get;
+        set;
+    }
+
+    public ICollection<SkillsDto> Skills { get; set; }
     
     public ValidityDurationDto ValidityDuration { get; set; }
 }

@@ -24,7 +24,9 @@ public class AutoMapperProfiles
     {
         public JobTitleProfile()
         {
-            CreateMap<CreateJobTitleInputDto, JobTitle>();
+            CreateMap<CreateJobTitleInputDto, JobTitle>().ReverseMap();
+
+            CreateMap<JobTitle, JobTitleList>();
             CreateMap<JobTitle, JobTitleDto>();
         }
     }
@@ -42,6 +44,14 @@ public class AutoMapperProfiles
         public SkillsProfile()
         {
             CreateMap<SkillsDto, Skills>().ReverseMap();
+        }
+    }
+    
+    public class UserApplyProfile : Profile
+    {
+        public UserApplyProfile()
+        {
+            CreateMap<UserApplyDto, UserApply>().ReverseMap();
         }
     }
 }

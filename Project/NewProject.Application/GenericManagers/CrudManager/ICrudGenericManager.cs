@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Query;
 using NewProject.Shared;
 
 namespace NewProject.Application;
@@ -17,12 +16,12 @@ public interface ICrudGenericManager <TKey, Entity, ReadDto, WriteDto>
 {
     public Task<IEnumerable<ReadDto>> GetAll(Expression<Func<Entity, bool>> expression, int? take, int? skip,
         Expression<Func<Entity, object>> orderBy,
-        string orderDirection = Constanties.ORDERASC, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>> include = null);
-    public Task<IEnumerable<ReadDto>> GetAll(Expression<Func<Entity, bool>> expression, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>> include = null);
+        string orderDirection = Constanties.ORDERASC , params string[] includes);
+    public Task<IEnumerable<ReadDto>> GetAll(Expression<Func<Entity, bool>> expression, params string[]? includes);
     public ReadDto GetBy(Expression<Func<Entity, bool>> expression);
-    public ReadDto GetBy(Expression<Func<Entity, bool>> expression, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>> include = null);
+    public ReadDto GetBy(Expression<Func<Entity, bool>> expression, params string[]? includes);
     public Task<ReadDto> GetById(TKey Id);
-    public Task<WriteDto> GetWrite(Expression<Func<Entity, bool>> expression, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>> include = null);
+    public Task<WriteDto> GetWrite(Expression<Func<Entity, bool>> expression, params string[]? includes);
     public Task<Entity> GetModelById(TKey Id);
     public Task<ReadDto> AddAsync(WriteDto dto);
     public ReadDto Add(WriteDto dto);

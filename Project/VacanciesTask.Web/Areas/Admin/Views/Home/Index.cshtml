@@ -1,359 +1,242 @@
 ﻿
 @using VacanciesTask.Shared.Helpers
 @{
-
     ViewBag.title = "Dashboard";
-    Layout = "~/Views/Shared/Layout/_layout.cshtml";
+    Layout = "Layout/_HorizontalLayout";
 }
 @section Styles {
-    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/vendors/css/weather-icons/climacons.min.css">
-    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/fonts/meteocons/style.css">
-
-    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/vendors/css/charts/chartist.css">
-    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/vendors/css/charts/chartist-plugin-tooltip.css">
-
     <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/css-ltr/pages/timeline.css">
     <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/css-ltr/pages/dashboard-ecommerce.css">
+    
+    <link rel="stylesheet" type="text/css" href="~/admin/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="~/admin/app-assets/vendors/css/extensions/sweetalert.css">
 }
 
 <!--------------------------------------------------------------------------------------------------------->
-<!-- statistic -->
-<div class="row statistic_cards">
-    <div class="col-xl-3 col-lg-6 col-12">
-        <div class="card pull-up">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="media-body text-left">
-                            <h3 class="info" style="font-size: 1.5rem">100</h3>
-                            <h6></h6>
-                        </div>
-                        <div>
-                            <i class="la la-user-secret info font-large-2 float-right"></i>
-                        </div>
-                    </div>
-                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-info w-100" role="progressbar"
-                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="1000">
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 justify-content-end">
+        <a asp-action="Create" asp-controller="JobTitle" asp-area="Admin" class="btn btn-info white float-right">
+            <i class="ft-file-plus"></i>
+            Add New
+        </a>
+    </div>
+    <table class="table data-table table-striped table-bordered zero-configuration text-center">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>JobCategory</th>
+            <th>MaximumApplications</th>
+            <th>UserApplyCount</th>
+            <th>SkillsCount</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="7"><span class="text-capitalize fw-bold">emptyTable</span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    @*
+<div class="col-md-4">
+    <div class="form-group">
+        <label for="jobTitleSearch" class="form-label" style="font-size: 1rem">Search Name:</label>
+        <div class="d-flex">
+            <input id="jobTitleSearch" class="form-control" type="text">
+            <button id="filterName" type="button" class="btn btn-primary mx-2"><i class="ft-search"></i> Search</button>
         </div>
     </div>
-    <div class="col-xl-3 col-lg-6 col-12">
-        <div class="card pull-up">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="media-body text-left">
-                            <h3 class="success">100</h3>
-                            <h6>عدد </h6>
-                        </div>
-                        <div>
-                            <i class="icon-users success font-large-2 float-right"></i>
-                        </div>
-                    </div>
-                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-success w-100" role="progressbar"
-                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100000"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-lg-6 col-12">
-        <div class="card pull-up">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="media-body text-left">
-                            <h3 class="warning">100</h3>
-                            <h6>عدد </h6>
-                        </div>
-                        <div>
-                            <i class="ft-award warning font-large-2 float-right"></i>
-                        </div>
-                    </div>
-                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-warning w-100" role="progressbar" style="width: 100%"
-                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-lg-6 col-12">
-        <div class="card pull-up">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="media-body text-left">
-                            <h3 class="danger">100</h3>
-                            <h6>عدد المحاضرات</h6>
-                        </div>
-                        <div>
-                            <i class="icon-tag danger font-large-2 float-right"></i>
-                        </div>
-                    </div>
-                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-danger w-100" role="progressbar"
-                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100000"></div>
-                    </div>
-                </div>
+</div>
+
+<div class="table-responsive text-center overflow-hidden">
+    <table class="table table-de mb-0">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>JobCategory</th>
+            <th>Skills Cont</th>
+            <th>MaximumApplications</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        @#1#if (ViewBag.JobTitles?.Count>0)
+        {
+            @for (var i = 0; i < ViewBag.JobTitles.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td>@(ViewBag.JobTitles[i]?.Name)</td>
+                    <td>@(ViewBag.JobTitles[i]?.JobCategory)</td>
+                    <td>@(ViewBag.JobTitles[i]?.SkillsCont)</td>
+                    <td>@(ViewBag.JobTitles[i]?.MaximumApplications)</td>
+                    <td>@(ViewBag.JobTitles[i]?.StartDate)</td>
+                    <td>@(ViewBag.JobTitles[i]?.EndDate)</td>
+                </tr>
+            }
+        }#1#
+        
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing  entries</div></div>
+        <div class="col-sm-12 col-md-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                <ul class="pagination justify-content-end">
+                    <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
+                        <a href="#" aria-controls="DataTables_Table_0" aria-disabled="1" data-dt-idx="1" tabindex="1" class="page-link">Previous</a>
+                    </li>
+                    <li class="paginate_button page-item next" id="DataTables_Table_0_next">
+                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="2" class="page-link">Next</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div id="recent-transactions" class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Recent Transactions</h4>
-                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <li>
-                            <a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right"
-                               href="invoice-summary.html" target="_blank">Invoice Summary</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="table-responsive">
-                    <table id="recent-orders" class="table table-hover table-xl mb-0">
-                        <thead>
-                            <tr>
-                                <th class="border-top-0">Status</th>
-                                <th class="border-top-0">Invoice#</th>
-                                <th class="border-top-0">Customer Name</th>
-                                <th class="border-top-0">Products</th>
-                                <th class="border-top-0">Categories</th>
-                                <th class="border-top-0">Shipping</th>
-                                <th class="border-top-0">Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-truncate"><i class="la la-dot-circle-o success font-medium-1 mr-1"></i>                          Paid</td>
-                                <td class="text-truncate"><a href="#">INV-001001</a></td>
-                                <td class="text-truncate">
-                                    <span class="avatar avatar-xs">
-                                        <img class="box-shadow-2" src="~/Admin/app-assets/images/portrait/small/avatar-s-4.png"
-                                             alt="avatar">
-                                    </span>
-                                    <span>Elizabeth W.</span>
-                                </td>
-                                <td class="text-truncate p-1">
-                                    <ul class="list-unstyled users-list m-0">
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kimberly Simmons"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-1.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Willie Torres"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-2.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Rebecca Jones"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-4.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li class="avatar avatar-sm">
-                                            <span class="badge badge-info">+1 more</span>
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-outline-danger round">Food</button>
-                                </td>
-                                <td>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 25%"
-                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">$ 1200.00</td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate"><i class="la la-dot-circle-o danger font-medium-1 mr-1"></i>                          Declined</td>
-                                <td class="text-truncate"><a href="#">INV-001002</a></td>
-                                <td class="text-truncate">
-                                    <span class="avatar avatar-xs">
-                                        <img class="box-shadow-2" src="~/Admin/app-assets/images/portrait/small/avatar-s-5.png"
-                                             alt="avatar">
-                                    </span>
-                                    <span>Doris R.</span>
-                                </td>
-                                <td class="text-truncate p-1">
-                                    <ul class="list-unstyled users-list m-0">
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kimberly Simmons"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-5.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Willie Torres"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-6.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li class="avatar avatar-sm">
-                                            <span class="badge badge-info">+2 more</span>
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-outline-warning round">Electronics</button>
-                                </td>
-                                <td>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 45%"
-                                             aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">$ 1850.00</td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate"><i class="la la-dot-circle-o warning font-medium-1 mr-1"></i>                          Pending</td>
-                                <td class="text-truncate"><a href="#">INV-001003</a></td>
-                                <td class="text-truncate">
-                                    <span class="avatar avatar-xs">
-                                        <img class="box-shadow-2" src="~/Admin/app-assets/images/portrait/small/avatar-s-6.png"
-                                             alt="avatar">
-                                    </span>
-                                    <span>Megan S.</span>
-                                </td>
-                                <td class="text-truncate p-1">
-                                    <ul class="list-unstyled users-list m-0">
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kimberly Simmons"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-2.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Willie Torres"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-5.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-outline-success round">Groceries</button>
-                                </td>
-                                <td>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%"
-                                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">$ 3200.00</td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate"><i class="la la-dot-circle-o success font-medium-1 mr-1"></i>                          Paid</td>
-                                <td class="text-truncate"><a href="#">INV-001004</a></td>
-                                <td class="text-truncate">
-                                    <span class="avatar avatar-xs">
-                                        <img class="box-shadow-2" src="~/Admin/app-assets/images/portrait/small/avatar-s-7.png"
-                                             alt="avatar">
-                                    </span>
-                                    <span>Andrew D.</span>
-                                </td>
-                                <td class="text-truncate p-1">
-                                    <ul class="list-unstyled users-list m-0">
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kimberly Simmons"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-6.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Willie Torres"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-1.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li class="avatar avatar-sm">
-                                            <span class="badge badge-info">+1 more</span>
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-outline-info round">Apparels</button>
-                                </td>
-                                <td>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 65%"
-                                             aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">$ 4500.00</td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate"><i class="la la-dot-circle-o success font-medium-1 mr-1"></i>                          Paid</td>
-                                <td class="text-truncate"><a href="#">INV-001005</a></td>
-                                <td class="text-truncate">
-                                    <span class="avatar avatar-xs">
-                                        <img class="box-shadow-2" src="~/Admin/app-assets/images/portrait/small/avatar-s-9.png"
-                                             alt="avatar">
-                                    </span>
-                                    <span>Walter R.</span>
-                                </td>
-                                <td class="text-truncate p-1">
-                                    <ul class="list-unstyled users-list m-0">
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kimberly Simmons"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-5.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Willie Torres"
-                                            class="avatar avatar-sm pull-up">
-                                            <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius"
-                                                 src="~/Admin/app-assets/images/portfolio/portfolio-3.jpg"
-                                                 alt="Avatar">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-outline-danger round">Food</button>
-                                </td>
-                                <td>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 35%"
-                                             aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">$ 1500.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+@section Scripts {
+    <script>
+    function GetJobData() {
+       var nameFilter = document.getElementById("jobTitleSearch");
+       let filterQuery = {Name: nameFilter, page: 1};
+       
+        fetch('@Url.Action("JobTitleList")', { method: 'POST',
+        body: JSON.stringify(filterQuery)
+         })
+        .then(Result => Result.json())
+        .then(res => {
+            console.log(res)
+            if (res.success){
+                if (res.data.filter.total){
+                    res.data.jobTitles.foreach((e)=> {
+                        console.log(e)
+                    })
+                }
+            }else {
+                console.log("filter error")
+            }
+        })
+        .catch(errorMsg => { console.log(errorMsg); });
+    }
+        var btn = document.getElementById("filterName");
+        btn.onclick = function() {
+            GetJobData();
+        }
+</script>
+}*@
 </div>
 
 <!--------------------------------------------------------------------------------------------------------->
 @section Scripts {
-    <script src="~/Admin/app-assets/vendors/js/charts/chart.min.js"
-            type="text/javascript"></script>
-    <script src="~/Admin/app-assets/vendors/js/charts/chartist.min.js" type="text/javascript"></script>
-    <script src="~/Admin/app-assets/vendors/js/charts/chartist-plugin-tooltip.min.js"
-            type="text/javascript"></script>
-    <script src="~/Admin/app-assets/vendors/js/charts/raphael-min.js" type="text/javascript"></script>
-    <script src="~/Admin/app-assets/vendors/js/charts/morris.min.js" type="text/javascript"></script>
-    <script src="~/Admin/app-assets/vendors/js/timeline/horizontal-timeline.js" type="text/javascript"></script>
-    <script src="~/Admin/app-assets/js/scripts/pages/dashboard-ecommerce.js"
-            type="text/javascript"></script>
+    <script src="~/admin/app-assets/vendors/js/tables/datatable/datatables.min.js" type="text/javascript"></script>
+    <script src="~/admin/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="~/admin/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js" type="text/javascript"></script>
+
+    <script src="~/admin/app-assets/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>
+    <script>
+        let table = $(document).ready(function () {
+
+            //$(".CreateBtn").attr("href", `Department/Create`);
+            let table = $(".data-table").DataTable({ 
+                "processing": true,        
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false, 
+                "lengthChange": false,
+                "pageLength": 3,
+                "paging": true,//false No matching records found
+                "pagingType": "simple",        
+                "ajax": {
+                    "url": "@Url.Action("Index")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+                {
+                    "name": "#",
+                    "autoWidth": true,
+                    "title": "#",
+                    "render": function (data, type, full, meta) {
+                        return (meta.settings._iDisplayLength * table.page.info().page) + meta.row + 1
+                    }
+                }, 
+                { "data": "name"||"-", "name": "Name", "autoWidth": true, "orderable": false },
+                { "data": "jobCategory"||"-", "name": "JobCategory", "autoWidth": true, "orderable": false },
+                { "data": "maximumApplications"||"-", "MaximumApplications": "Name", "autoWidth": true, "orderable": false },
+                { "data": "userApplyCount"||"-", "name": "UserApplyCount", "autoWidth": true, "orderable": false },
+                { "data": "skillsCount"||"-", "name": "SkillsCont", "autoWidth": true, "orderable": false },
+                { "data": "startDate"||"-", "name": "StartDate", "autoWidth": true, "orderable": false },
+                { "data": "endDate"||"-", "name": "Name", "EndWidth": true, "orderable": false },
+                
+                {
+                    name: "Actions",
+                    "autoWidth": false,
+                    orderable: false,
+                    "render": function (data, type, full, meta) {
+                        let html = '';
+                        html += ` <a href="@Url.Action("Edit", controller: "JobTitle")?id=${full.id}" class="btn btn-info white mb-1 mx-50" data-toggle="tooltip" data-placement="top" title="edit"><i class="ft-edit"></i></a>`;
+                        html += `<button type="button" class="confirm-delete btn btn-danger white mb-1 mx-50" data-guid="${full.id}" title="@localizer["delete"]"><i class="ft-trash-2"></i></button>`;
+                        return html;
+                    }
+                },
+            ]
+        });
+    });
+        
+    $(document).on('click', '.confirm-delete' , function () {
+        let guid = $(this).data("guid");
+        swal({
+            title: `Are you sure to Delete this JobTitle?`,
+            text: "JobTitle Will Be Remove and All Relation Date!",
+            icon: "warning",
+            showCancelButton: true,
+            buttons: {
+                cancel: {
+                    text: "No Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-warning",
+                    closeModal: false,
+                },
+                confirm: {
+                    text: "Yes Delete",
+                    value: true,
+                    visible: true,
+                    className: "btn-danger",
+                    closeModal: false
+                }
+            }
+        }).then(isConfirm => {
+            if (isConfirm) {
+                $.ajax({
+                    method: "DELETE",
+                    url: `@Url.Action("Delete", controller:"JobTitle", new { area = "Admin" })?id=${guid}`,
+                    success: function(data){
+                        if (data.success === true) {
+                            swal("Data Deleted!", data.msg, "success");
+                            $('.data-table').DataTable().ajax.reload()
+                        }else
+                        {
+                            swal("Not Found!", "JobTitle Data is not Found!", "error");
+                        }
+                    }
+                });
+            } else {
+                swal("Cancelled Request!", `No Data Remove`, "warning");
+            }
+        });
+    });   
+</script>
+
 }

@@ -9,7 +9,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace NewProject.Repositories
 {
@@ -26,13 +25,12 @@ namespace NewProject.Repositories
             return _dbContext.Set<T>();
         }
 
-        public IQueryable<T> Get(Expression<Func<T, bool>>? expression = null, Expression<Func<T, object>>? orderby = null,
-            string? orderDirection = Constanties.ORDERASC , int? take = null, int? skip = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        public IQueryable<T> Get(Expression<Func<T, bool>>? expression = null, Expression<Func<T, object>>? orderby = null, string? orderDirection = Constanties.ORDERASC , int? take = null, int? skip = null, params string[] include)
         {
             var query = this.SetEntity();
-            
-            if (include != null)
-                query = include(query);
+            if (include != null && include.Length > 0)
+                foreach (string i in include)
+                    query = query.Include(i);
             if (expression != null)
                 query = query.Where(expression);
             
@@ -55,27 +53,22 @@ namespace NewProject.Repositories
             }
             return query;
         }
-        public IQueryable<T> Get(Expression<Func<T, bool>>? expression = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
-        {
-            return this.Get(expression, null, null, include: include);
-        }
         
+        public IQueryable<T> Get(Expression<Func<T, bool>>? expression = null, params string[] include)
+        {
+            return this.Get(expression, null, null, null, include: include);
+        }
+
+        public T? GetBy(Expression<Func<T, bool>> expression, params string[] include)
+        {
+            return this.Get(expression, include: include).FirstOrDefault();
+        }
+
         public T? GetBy(Expression<Func<T, bool>> expression)
         {
             var query = this.SetEntity();
             return query.Where(expression).FirstOrDefault();
         }
-        
-        public T? GetBy(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
-        {
-            var entity = SetEntity();
-            if (include != null)
-                entity = include(entity);
-            if (expression != null)
-                entity = entity.Where(expression);
-            return entity.FirstOrDefault();
-        }
-
         public async Task<T?> GetById(TKey Id)
         {
             return await _dbContext.Set<T>().FindAsync(Id);

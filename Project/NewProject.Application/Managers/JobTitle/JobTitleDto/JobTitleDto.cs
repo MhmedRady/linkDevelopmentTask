@@ -1,23 +1,27 @@
 using NewProject.Domain;
+using NewProject.Domain.BaseEntities;
 
 namespace NewProject.Application;
 
-public class JobTitleDto
+public class JobTitleDto : BaseEntity<Guid>
 {
     public string Name { get; set; } 
-    public string Description { get; set; }
-    public string Responsibilities { get; set; }
+    /*public string Description { get; set; }
+    public string Responsibilities { get; set; }*/
     public string JobCategory { get; set; }
     public int MaximumApplications { get; set; }
 
-    public int SkillsCont
+    public int SkillsCount
     {
-        get => Skills.Count();
+        get;
+        set;
     }
     
-    public string StartDate { get => ValidityDuration.From.ToString(@"yyyy-MM-dd"); }
-    public string EndDate { get => ValidityDuration.To.ToString(@"yyyy-MM-dd"); }
+    public string StartDate { get; set; }
+    public string EndDate { get; set; }
+    public int UserApplyCount { get; set; }
 
     public ValidityDurationDto ValidityDuration { get; set; }
     public ICollection<SkillsDto> Skills { get; set; }
+    public ICollection<UserApply> UserApplies { get; set; }
 }

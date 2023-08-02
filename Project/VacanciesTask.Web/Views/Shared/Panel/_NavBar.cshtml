@@ -6,45 +6,49 @@
 }
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 <!-- fixed-top-->
-<nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-info navbar-shadow">
-    <div class="navbar-wrapper">
-        <div class="navbar-header">
+<nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow navbar-static-top navbar-light navbar-brand-center">
+        <div class="navbar-wrapper">
+          <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-                <li class="nav-item">
-                    <a class="navbar-brand" href="index.html">
-                        <img class="brand-logo" alt="modern admin logo" src="~/admin/app-assets/images/logo/logo.png">
-                        <h3 class="brand-text">Modern Admin</h3>
-                    </a>
-                </li>
-                <li class="nav-item d-md-none">
-                    <a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a>
-                </li>
+              <li class="nav-item mobile-menu d-none mr-auto">
+                <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#">
+                  <i class="ft-menu font-large-1"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" asp-action="Index" asp-controller="Home">
+                  <img class="brand-logo" alt="" src="~/images/logo.png">
+                  <h3 class="brand-text">Job Title WorkShop</h3>
+                </a>
+              </li>
+              <li class="nav-item d-none">
+                <a class="nav-link open-navbar-container d-none" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a>
+              </li>
             </ul>
-        </div>
-        <div class="navbar-container content">
-            <div class="collapse navbar-collapse" id="navbar-mobile">
-                <ul class="nav navbar-nav mr-auto float-left">
-                    <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-                    <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
-                </ul>
-                <ul class="nav navbar-nav float-right">
-                    <li class="dropdown dropdown-user nav-item">
-                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                            <span class="user-name text-bold-700">@(User?.Identity?.Name)</span>
-                            <span class="avatar avatar-online" style="width: 50px">
-                              <img src="~/images/user_avatar.png" alt="avatar">
-                              <i></i>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-action="Logout" asp-controller="Account"><i class="ft-power"></i> Logout</a>
-                        </div>
-                    </li>
-                </ul>
+          </div>
+          <div class="navbar-container content">
+            <div class="collapse navbar-collapse d-block" id="navbar-mobile">
+              <ul class="nav navbar-nav mr-auto float-left">
+                
+              </ul>
+              <ul class="nav navbar-nav float-right">
+                <li class="dropdown dropdown-user nav-item">
+                  <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                    <span class="avatar avatar-online" style="width: 50px">
+                      <img src="~/images/user_avatar.png" alt="avatar">
+                      <i></i>
+                      </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i class="ft-user"></i> Edit Profile</a>
+                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">
+                      <i class="ft-power"></i> Logout
+                    </a>
+                  </div>
+                </li>
+                
+              </ul>
             </div>
+          </div>
         </div>
-    </div>
-</nav>
+      </nav>
   <!-- ////////////////////////////////////////////////////////////////////////////-->

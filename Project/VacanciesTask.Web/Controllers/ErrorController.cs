@@ -5,7 +5,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using NewProject.DBL;
 using NewProject.Domain;
 using NewProject.EntityFrameworkCore;
 

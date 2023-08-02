@@ -10,6 +10,7 @@ public partial class Constanties
 {
 
     public const string FULLNAME_REQUIRED = "User full-Name is Required";
+    public const string NAME_REQUIRED = "JobTitle Name is Required";
     public const string EMAIL_REQUIRED = "Person Email is Required";
     public const string PhoneNumber_REQUIRED = "User phone-Number is Required";
     public const string PASSWORD_REQUIRED = "Password is Required";

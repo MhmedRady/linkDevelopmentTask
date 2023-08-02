@@ -108,7 +108,78 @@ namespace NewProject.EntityFrameworkCore.Seeding
                                     Name = "Javascript",
                                 },
                             }
-                        }
+                        },
+                        new JobTitle()
+                        {
+                            Name = "Front-end Developer (Angular)",
+                            Description = "We are looking for a Senior .NET developer that will be able to develop and support existing applications. The main scope of work will include everything from back-end to client-side code, using optimal and efficient technologies, frameworks, and patterns. Your primary responsibilities will be to design and develop these applications. Therefore, it’s essential that you are skilled at problem solving, solution design, and high-quality coding.",
+                            Responsibilities = "<ul><li>Participate in requirements analysis<br></li><li>Collaborate with internal teams to produce software design and architecture</li><li>Write clean, scalable code using .NET programming languages</li><li>Test and deploy applications and systems</li><li>Revise, update, refactor and debug code</li><li>Develop documentation throughout the software development life cycle</li><li>Serve as an expert on applications and provide technical support</li><li>Analyzing requirements and designing new functionality<br></li></ul>",
+                            MaximumApplications = 10,
+                            JobCategory = "software engineer",
+                            CreatedAt = DateTime.Now,
+                            ValidityDuration = new ValidityDuration()
+                            {
+                                From = DateTime.Now,
+                                To = DateTime.Today.AddDays(5)
+                            },
+                            Skills = new []
+                            {
+                                new Skills()
+                                {
+                                    Name = "Angular",
+                                },
+                                new Skills()
+                                {
+                                    Name = "JavaScript",
+                                },
+                            }
+                        },
+                        new JobTitle()
+                        {
+                            Name = "Flutter Developer (Flutter)",
+                            Description = "We are looking for a Senior .NET developer that will be able to develop and support existing applications. The main scope of work will include everything from back-end to client-side code, using optimal and efficient technologies, frameworks, and patterns. Your primary responsibilities will be to design and develop these applications. Therefore, it’s essential that you are skilled at problem solving, solution design, and high-quality coding.",
+                            Responsibilities = "<ul><li>Participate in requirements analysis<br></li><li>Collaborate with internal teams to produce software design and architecture</li><li>Write clean, scalable code using .NET programming languages</li><li>Test and deploy applications and systems</li><li>Revise, update, refactor and debug code</li><li>Develop documentation throughout the software development life cycle</li><li>Serve as an expert on applications and provide technical support</li><li>Analyzing requirements and designing new functionality<br></li></ul>",
+                            MaximumApplications = 10,
+                            JobCategory = "software engineer",
+                            CreatedAt = DateTime.Now,
+                            ValidityDuration = new ValidityDuration()
+                            {
+                                From = DateTime.Now,
+                                To = DateTime.Today.AddDays(3)
+                            },
+                            Skills = new []
+                            {
+                                new Skills()
+                                {
+                                    Name = "Dart",
+                                },
+                                new Skills()
+                                {
+                                    Name = "Flutter",
+                                },
+                            }
+                        },
+                        new JobTitle()
+                        {
+                            Name = "Graphic Designer",
+                            Description = "We are looking for a Senior .NET developer that will be able to develop and support existing applications. The main scope of work will include everything from back-end to client-side code, using optimal and efficient technologies, frameworks, and patterns. Your primary responsibilities will be to design and develop these applications. Therefore, it’s essential that you are skilled at problem solving, solution design, and high-quality coding.",
+                            Responsibilities = "<ul><li>Participate in requirements analysis<br></li><li>Collaborate with internal teams to produce software design and architecture</li><li>Write clean, scalable code using .NET programming languages</li><li>Test and deploy applications and systems</li><li>Revise, update, refactor and debug code</li><li>Develop documentation throughout the software development life cycle</li><li>Serve as an expert on applications and provide technical support</li><li>Analyzing requirements and designing new functionality<br></li></ul>",
+                            MaximumApplications = 10,
+                            JobCategory = "software engineer",
+                            CreatedAt = DateTime.Now,
+                            ValidityDuration = new ValidityDuration()
+                            {
+                                From = DateTime.Now,
+                                To = DateTime.Today.AddDays(7)
+                            },
+                            Skills = new []
+                            {
+                                new Skills()
+                                {
+                                    Name = "Photoshop",
+                                },
+                            }
+                        },
                     };
                     await context.JobTitles.AddRangeAsync(jobTitles);
                     await context.SaveChangesAsync();
@@ -118,6 +189,7 @@ namespace NewProject.EntityFrameworkCore.Seeding
                 {
                     UserApply user = new UserApply()
                     {
+                        Id = Guid.NewGuid(),
                         Name = "MohamedRady",
                         Email = "Mohamed.Rady@gmail.com",
                         MobileNumber = "01069364670",

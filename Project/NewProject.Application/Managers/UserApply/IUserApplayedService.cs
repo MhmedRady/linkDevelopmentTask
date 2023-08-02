@@ -10,9 +10,7 @@ using System.Linq.Expressions;
 
 namespace NewProject.Application;
 
-public interface IApplicationUserService
+public interface IUserApplayedService : ICrudGenericManager<Guid, UserApply, UserApplyDto, UserApplyDto>
 {
-    public Task<UserDto> AddAsync(CreateUserInput dto, string role);
-    Task<LoginResultDto> Login(LoginDto model);
-    Task Logout();
+    
 }

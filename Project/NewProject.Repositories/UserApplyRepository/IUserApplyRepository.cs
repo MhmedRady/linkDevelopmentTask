@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NewProject.Repositories;
 
-public interface IJobTitleRepository : IGeneralRepository<JobTitle, Guid>
+public interface IUserApplyRepository : IGeneralRepository<UserApply, Guid>
 {
     
 }

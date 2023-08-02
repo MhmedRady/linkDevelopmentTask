@@ -10,19 +10,11 @@ namespace NewProject.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {
-    MainDbContext _DBContext;
+    private readonly MainDbContext _DBContext;
     public UnitOfWork(MainDbContext DBContext)
     {
         _DBContext = DBContext;
-     
-        UserRepository = new UserRepository(_DBContext);
-        JobTitleRepository = new JobTitleRepository(_DBContext);
-        //ValidityDurationRepository = new GeneralRepository<ValidityDuration, Guid>(_DBContext);
     }
-    
-    public IUserRepository UserRepository { get; private set; }
-    public IJobTitleRepository JobTitleRepository { get; private set; }
-    //public IGeneralRepository<ValidityDuration, Guid> ValidityDurationRepository { get; }
 
     public async Task<int> SaveChangesAsync()
     {

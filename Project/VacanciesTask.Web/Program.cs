@@ -12,7 +12,6 @@ using VacanciesTask.Areas.Admin.Validations;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Localization;
-using NewProject.DBL;
 using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,14 +60,16 @@ builder.Services.AddAuthentication()
     builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 #endregion
 
-#region Manager
-    builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
+#region Managers
+builder.Services.AddScoped<IJobTitleService, JobTitleService>();
+builder.Services.AddScoped<IUserApplayedService, UserApplayedService>();
+builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 #endregion
 
-#region repositories
-    builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+#region repositories;
+builder.Services.AddScoped(typeof(IGeneralRepository <,> ), typeof(GeneralRepository <,> ));
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 #endregion
-
 #region UnitOfWork
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 #endregion

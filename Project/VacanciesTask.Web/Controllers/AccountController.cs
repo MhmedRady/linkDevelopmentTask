@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using VacanciesTask.Controllers;
-using VacanciesTask.Validations;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NewProject.API;
 using NewProject.Application;
-using NewProject.DBL;
 using NewProject.Domain;
 using NewProject.Shared;
 using NToastNotify;
@@ -106,7 +104,7 @@ public class AccountController: _Controller
     [HttpPost]
      public async Task<IActionResult> Register(CreateUserInput model)
      {
-         UserRegisterValidation validator = new UserRegisterValidation();
+         //UserRegisterValidation validator = new UserRegisterValidation();
          
          try
          {

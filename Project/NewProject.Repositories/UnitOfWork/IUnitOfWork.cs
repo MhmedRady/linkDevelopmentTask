@@ -9,9 +9,6 @@ namespace NewProject.Repositories;
 
 public interface IUnitOfWork : IDisposable
 {
-    IUserRepository UserRepository { get; }
-    IJobTitleRepository JobTitleRepository { get; }
-    //IGeneralRepository<ValidityDuration, Guid> ValidityDurationRepository { get; }
     Task<int> SaveChangesAsync();
     int SaveChanges();
 }

@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics;
+using System.Linq.Expressions;
 using VacanciesTask.Controllers;
 using VacanciesTask.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NewProject.API.Extensions;
 using NewProject.Application;
-using NewProject.DBL;
+using NewProject.Domain;
 using NToastNotify;
+using NToastNotify.Helpers;
 
 namespace VacanciesTask.Web.Areas.Admin.Controllers
 {
@@ -15,13 +18,29 @@ namespace VacanciesTask.Web.Areas.Admin.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IToastNotification _toastNotification;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IJobTitleService _jobTitleService;
+        public HomeController(ILogger<HomeController> logger, IJobTitleService jobTitleService)
         {
             _logger = logger;
+            _jobTitleService = jobTitleService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if (Request.IsNtoastNotifyAjaxRequest())
+            {
+                var dataTableRequest = this.GetPagedData();
+                Expression<Func<JobTitle, bool>> NameExpression = jobTitle => (!string.IsNullOrEmpty(dataTableRequest["searchValue"])? jobTitle.Name.Contains(dataTableRequest["searchValue"]): true);
+                var JobTitles = await _jobTitleService.CountsOfJobTitle(expression: NameExpression, take:3, skip: Int32.Parse(dataTableRequest["start"]), jt => jt.Id);
+                var total = _jobTitleService.Count(NameExpression);
+                return Json(new 
+                {
+                    recordsFiltered = total, 
+                    recordsTotal = total, 
+                    data = JobTitles,
+                    pageSize = 3,
+                });
+            }
             
             return View();
         }

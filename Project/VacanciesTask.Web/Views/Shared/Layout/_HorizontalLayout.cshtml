@@ -1,7 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
-<html class="loading" lang="en" dir="rtl">
+<html class="loading" lang="en" dir="ltr">
 <head>
     @Html.Partial("Panel/_Head")
     
@@ -48,7 +48,8 @@
   <body class="horizontal-layout horizontal-menu 2-columns menu-expanded pace-done"
         data-open="click" data-menu="vertical-menu" data-col="2-columns">
     <header>
-   
+       <!-- fixed-top NavBar-->
+       @Html.Partial("Panel/_NavBar")
     </header>
       <div class="app-content content">
           <div class="content-wrapper">

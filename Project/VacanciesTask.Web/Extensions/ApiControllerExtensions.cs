@@ -16,7 +16,7 @@ namespace NewProject.API
         //{
         //    return controller.Ok(new { success = true, data = data });
         //}
-        public static IActionResult AppSuccess(this ControllerBase controller, dynamic data, string message = "تمت العملية بنجاح!.")
+        public static IActionResult AppSuccess(this ControllerBase controller, dynamic data, string message = Constanties.SUCCESS_SAVED)
         {
             return controller.Ok(new { success = true, data, message });
         }
@@ -26,16 +26,16 @@ namespace NewProject.API
             return controller.Ok(new { success = false, data });
         }
 
-        public static IActionResult AppFailed(this ControllerBase controller, string message = "عفواً حدث خطأ أثناء تنفيذ طلبك", dynamic data = null)
+        public static IActionResult AppFailed(this ControllerBase controller, string message = Constanties._ERROR, dynamic data = null)
         {
             return controller.Ok(new { success = false, data, message });
         }
-        public static IActionResult AppDeleteFailed(this ControllerBase controller, string message = "عفوا لا يمكن حذف هذا العنصر , هناك بيانات مرتبطة به", dynamic data = null)
+        public static IActionResult AppDeleteFailed(this ControllerBase controller, string message = Constanties.FAILED_DELETED, dynamic data = null)
         {
             return controller.Ok(new { success = false, data, message });
         }
 
-        public static IActionResult AppNotFound(this ControllerBase controller, string msg = "العنصر المطلوب غير موجود")
+        public static IActionResult AppNotFound(this ControllerBase controller, string msg = Constanties.NOTFOUND)
         {
             return controller.Ok(new { success = false, message = msg });
         }

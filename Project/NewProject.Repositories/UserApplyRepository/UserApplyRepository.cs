@@ -2,16 +2,14 @@
 using NewProject.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using NewProject.Shared;
 
 namespace NewProject.Repositories;
 
-public class JobTitleRepository : GeneralRepository<JobTitle, Guid>, IJobTitleRepository
+public class UserApplyRepository : GeneralRepository<UserApply, Guid>, IUserApplyRepository
 {
     private readonly MainDbContext _DBContext;
-    public JobTitleRepository(MainDbContext dbContext) : base(dbContext)
+    public UserApplyRepository(MainDbContext dbContext) : base(dbContext)
     {
         _DBContext = dbContext;
     }

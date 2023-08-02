@@ -1,0 +1,99 @@
+﻿@using VacanciesTask.Shared.Helpers
+@model NewProject.Application.CreateJobTitleInputDto
+@{
+
+    ViewBag.title = @Model.Name??"Home Page";
+    Layout = "Layout/_CardView";
+}
+
+<!--------------------------------------------------------------------------------------------------------->
+
+<div class="row g-0">
+    <div class="col-md-8">
+        <div class="card jobTitleCard mb-3">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <h3 class="font-weight-bold">
+                        @Model.Name
+                    </h3>
+                    <ul>
+                        <li><span>Job Category:</span> @Model.JobCategory</li>
+                        <li><span>Creation Date: </span>
+                            @Helper.diffDate(DateTime.Today, DateTime.Today.AddDays(3).AddHours(4))
+                        </li>
+                        <li>
+                            <span>Deadline: </span>
+                            @(Model?.ValidityDuration?.To.ToString("MMM dd, yyyy ddd"))
+                        </li>
+                    </ul>
+                    @if (Model.ValidityDuration.To < DateTime.Today)
+                    {
+                        <strong class="text-danger font-size-large"> <i class="ft-minus-circle"></i> This Job No Longer accepting <Application> </Application></strong>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card jobTitleCard">
+            <div class="skills mb-2">
+                <h4 class="font-weight-bold">Skills:</h4>
+                @foreach (var skill in Model.Skills)
+                {
+                    <span class="badge rounded-pill bg-info">
+                        <i class="ft-tag"></i>
+                        @skill.Name
+                    </span>
+                }
+            </div>
+            <h3 class="font-weight-bold">Job Description</h3>
+            <p>
+                @Html.Raw(Model.Description)
+            </p>
+            <h3 class="font-weight-bold">Job Responsibilities</h3>
+            <p>
+                @Html.Raw(Model.Responsibilities)
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+            @if (Model.ValidityDuration.To >= DateTime.Today)
+            {
+                <div class="card jobTitleCard mb-3">
+    
+                    <form asp-action="Apply" asp-route-id="@ViewBag.JobId" method="POST">
+                        <fieldset class="form-group">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" name="Name">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="Email" class="form-control" name="Email">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label class="form-label">Mobile Number</label>
+                            <input type="text" class="form-control" name="MobileNumber">
+                        </fieldset>
+                        <div class="jobs-btn">
+                            <button type="submit" class="default-btn ">Apply Now</button>
+                        </div>
+                    </form>
+    
+                </div>
+    
+            }
+            
+        </div>
+        
+</div>
+<!--------------------------------------------------------------------------------------------------------->
+
+@section Styles {
+    
+}
+
+@section Scripts {
+    
+}
